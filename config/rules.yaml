@@ -1,0 +1,67 @@
+# Detection rules for CyberGuard
+# Each rule defines:
+#   description:       human-readable threat name shown on the dashboard
+#   where:             filter criteria applied to normalized events
+#   threshold:         number of matching events that triggers an alert
+#   window_minutes:    sliding time window in which the threshold must be met
+#   severity:          low | medium | high | critical
+#   recommended_action: what the operator should do when this alert fires
+#
+# Generic sliding-window evaluation: events matching 'where' are grouped by
+# source_ip. If 'threshold' events occur within 'window_minutes', an alert fires.
+
+brute_force:
+  description: "Brute Force Attack"
+  details: "5+ failed logins from same IP within 5 minutes"
+  where:
+    action: failure
+    category: authentication
+  threshold: 5
+  window_minutes: 5
+  severity: high
+  recommended_action: "Block the source IP at the firewall. Check whether any accounts were successfully compromised."
+
+web_scan:
+  description: "Web Directory Scanning"
+  details: "10+ HTTP 404 responses from same IP within 2 minutes"
+  where:
+    event_type: http_not_found
+  threshold: 10
+  window_minutes: 2
+  severity: medium
+  recommended_action: "Review the requested paths for signs of vulnerability probing. Consider rate-limiting the IP."
+
+repeated_401:
+  description: "Web Authentication Attempt"
+  details: "5+ HTTP 401 unauthorized responses on login endpoints within 5 minutes"
+  where:
+    event_type: http_unauthorized
+  threshold: 5
+  window_minutes: 5
+  severity: medium
+  recommended_action: "Investigate the targeted login endpoint. Lock the account if the same username is being hammered."
+
+firewall_deny_burst:
+  description: "Firewall Denial Burst"
+  details: "10+ firewall drop/deny events from same source IP within 2 minutes"
+  where:
+    event_type: traffic_deny
+  threshold: 10
+  window_minutes: 2
+  severity: high
+  recommended_action: "Confirm the denied destinations are intentional. Block the source IP if the burst is not legitimate."
+
+cloud_console_login_failure:
+  description: "AWS Console Login Failure"
+  details: "5+ failed ConsoleLogin events from same IP within 5 minutes"
+  where:
+    event_type: ConsoleLogin
+    action: failure
+  threshold: 5
+  window_minutes: 5
+  severity: high
+  recommended_action: "Check the AWS CloudTrail console for the affected user. Enable MFA and alert the account owner."
+
+# Note: Port scan detection (counting distinct destination ports per IP)
+# is planned for a future engine upgrade. The current sliding-window
+# algorithm filters by column equality only and cannot count distinct values.

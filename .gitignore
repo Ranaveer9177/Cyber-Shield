@@ -1,0 +1,152 @@
+# =============================================================================
+# Python, Virtual Environments & Bytecode
+# =============================================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# =============================================================================
+# Testing & Test Artifacts
+# =============================================================================
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+*.log
+!data/samples/*.log
+*.pcap
+/test_stack.py
+test_*.tmp
+test_*.log
+test_*.png
+test_*.docx
+test_*.pdf
+test_*.db*
+scratch/
+scratch_*
+
+# Protect backend pytest test suite
+!tests/**
+tests/**/__pycache__/
+tests/**/*.pyc
+tests/**/*.pyo
+
+# =============================================================================
+# Academic Internship Reports & Document Artifacts
+# =============================================================================
+acadamic/
+academic/
+preview_user_report/
+**/preview_user_report/
+# Generated Word reports and Microsoft Word temporary lock files
+*.docx
+*.doc
+*.docm
+~$*.docx
+~$*.doc
+*.tmp
+# Generated PDF reports
+*.pdf
+# Academic preview & rendered image caches
+acadamic/pdf_pages_ours/
+acadamic/pdf_pages_senior/
+acadamic/senior_pages_all/
+acadamic/preview_final/
+acadamic/refernce-test/
+acadamic/my reports/
+pdf_pages_*/
+senior_pages_*/
+# Text dumps & scratch inspection artifacts
+senior_extracted_full.txt
+senior_report_full_text.txt
+tail_tables.txt
+scratch_tab_test.docx
+
+# =============================================================================
+# Database & Raw Log Forensics
+# =============================================================================
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+*.sqlite*
+cybershield.db
+**/cybershield.db
+data/raw/*
+!data/raw/.gitkeep
+src/data/raw/*
+!src/data/raw/.gitkeep
+data/*.db*
+src/data/*.db*
+
+# Whitelist synthetic attack samples
+!data/samples/**
+
+# =============================================================================
+# Security Scanner & Tool Caches
+# =============================================================================
+.vibeguard/
+CACHEDIR.TAG
+
+# =============================================================================
+# Internal Agent & Workspace Metadata
+# =============================================================================
+.agents/
+
+# =============================================================================
+# Environment & Secrets
+# =============================================================================
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.cert
+*.conf
+!config/fluent-bit*.conf
+
+# =============================================================================
+# Frontend (Node / Vite)
+# =============================================================================
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/*.local
+frontend/package-lock.json
+package-lock.json
+.oxlintcache
+
+# =============================================================================
+# OS & Editor Artifacts
+# =============================================================================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*~
